@@ -1,0 +1,15 @@
+# ВНИМАНИЕ: Папка /firmware вынесена за пределы воркспейса намеренно,
+# чтобы избежать конфликтов rust-analyzer при работе с разными таргетами (std vs no_std).
+
+[workspace]
+resolver = "3"
+members = ["cli","common"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.92"
+license = "MIT OR Apache-2.0"
+authors = ["guamoko995 guamoko95@gmail.com"]
+repository = "https://github.com/guamoko995/robotic-arm-complex"
+homepage = "https://github.com/guamoko995/robotic-arm-complex"

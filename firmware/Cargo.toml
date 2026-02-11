@@ -1,0 +1,94 @@
+[package]
+name         = "firmware"
+version      = "0.1.0"
+edition      = "2024"
+rust-version = "1.90"
+license      = "MIT OR Apache-2.0"
+authors      = ["guamoko995 guamoko95@gmail.com"]
+repository   = "https://github.com/guamoko995/robotic-arm-complex"
+homepage     = "https://github.com/guamoko995/robotic-arm-complex"
+
+[[bin]]
+name = "firmware"
+path = "./src/main.rs"
+
+[dependencies]
+esp-hal  = { version = "1.0.0", features = ["defmt", "esp32", "unstable"] }
+esp-rtos = { version = "0.2.0", features = [
+  "defmt",
+  "embassy",
+  "esp-alloc",
+  "esp-radio",
+  "esp32",
+] }
+defmt                  = "1.0.1"
+esp-bootloader-esp-idf = { version = "0.4.0", features = ["defmt", "esp32"] }
+embassy-net = { version = "0.7.1", features = [
+  "defmt",
+  "dhcpv4",
+  "medium-ethernet",
+  "tcp",
+  "udp",
+] }
+embassy-futures = "0.1.2"
+embedded-io = { version = "0.7.1", features = ["defmt"] }
+embedded-io-async = { version = "0.6.1", features = ["defmt-03"] }
+esp-alloc = { version = "0.9.0", features = ["defmt","esp32"] }
+esp-println = { version = "0.16.1", features = ["defmt-espflash", "esp32"] }
+# for more networking protocol support see https://crates.io/crates/edge-net
+embassy-executor = { version = "0.9.1", features = ["defmt"] }
+embassy-time = { version = "0.5.0", features = ["defmt"] }
+embassy-sync = { version = "0.7.2", features = ["defmt"] }
+esp-radio = { version = "0.17.0", features = [
+  "defmt",
+  "esp-alloc",
+  "esp32",
+  "smoltcp",
+  "unstable",
+  "wifi",
+] }
+smoltcp = { version = "0.12.0", default-features = false, features = [
+  "defmt",
+  "medium-ethernet",
+  "multicast",
+  "proto-dhcpv4",
+  "proto-dns",
+  "proto-ipv4",
+  "socket-dns",
+  "socket-icmp",
+  "socket-raw",
+  "socket-tcp",
+  "socket-udp",
+] }
+critical-section = "1.2.0"
+static_cell = "2.1.1"
+picoserve = { version = "0.17.1", features = ["embassy", "ws"] }
+embedded-hal = "1.0.0"
+serde = { version = "1.0.*", default-features = false }
+postcard = "1.1.*"
+heapless = "0.9.*"
+common = {path="../common"}
+leasehund = "0.2.0"
+libm = "0.2.15"
+embassy-embedded-hal = "0.5.0"
+esp-storage = { version = "0.7.0", features = ["esp32"] }
+embedded-storage = "0.3.1"
+sequential-storage = "7.1.0"
+embedded-storage-async = "0.4.1"
+enumset = "1.1.10"
+
+[profile.dev]
+# Rust debug is too slow.
+# For debug builds always builds with some optimization
+opt-level = "s"
+
+[profile.release]
+codegen-units    = 1     # LLVM can perform better optimizations using a single thread
+debug            = 2
+debug-assertions = false
+incremental      = false
+lto              = 'fat'
+opt-level        = 's'
+overflow-checks  = false
+
+[workspace]
