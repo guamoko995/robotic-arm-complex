@@ -9,8 +9,8 @@ repository   = { workspace = true }
 homepage     = { workspace = true }
 
 [dependencies]
+enumset  = { version = "1.1.10", default-features = false, features=["serde"]}
+heapless = { version = "0.9.*", default-features = false, features=["serde"]}
+libm     = { version = "0.2.15", default-features = false}
+postcard = { version = "1.1.*", default-features = false, features=["heapless","experimental-derive"]}
 serde    = { version = "1.0.*", default-features = false}
-postcard = { version = "1.1.*", features=["experimental-derive"]}
-heapless = { version = "0.9.*", features=["serde"]}
-libm     = "0.2.15"
-enumset  = { version = "1.1.10", features=["serde"]}
